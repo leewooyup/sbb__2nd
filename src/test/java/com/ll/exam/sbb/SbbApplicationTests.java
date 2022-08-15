@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -125,6 +126,19 @@ class SbbApplicationTests {
         if(oa.isPresent()) {
             Answer a = oa.get();
             assertThat(a.getQuestion().getId()).isEqualTo(1);
+        }
+    }
+
+    @Test
+    @Transactional
+    void 질문에_달린_답변찾기() {
+        Optional<Question> oq = this.questionRepository.findById(1);
+        if(oq.isPresent()) {
+            Question q = oq.get();
+
+            List<Answer> answerList = q.getAnswerList();
+            assertThat(answerList.size()).isEqualTo(1);
+            assertThat(answerList.get(0).getContent()).isEqualTo("springboot board의 줄임말입니다.");
         }
     }
 }
