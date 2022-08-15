@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,5 +42,14 @@ class SbbApplicationTests {
 
 		Question q = all.get(0);
 		assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
+	}
+
+	@Test
+	void 특정_질문_가져오기() {
+		Optional<Question> oq = this.questionRepository.findById(1);
+		if(oq.isPresent()) {
+			Question q = oq.get();
+			assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
+		}
 	}
 }
