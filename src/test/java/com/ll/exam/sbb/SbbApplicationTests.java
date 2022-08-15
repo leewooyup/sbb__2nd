@@ -77,4 +77,14 @@ class SbbApplicationTests {
         Question q = qList.get(0);
         assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
     }
+
+    @Test
+    void 데이터_수정하기() {
+        Optional<Question> oq = this.questionRepository.findById(1);
+        if(oq.isPresent()) {
+            Question q = oq.get();
+            q.setSubject("수정된제목");
+            this.questionRepository.save(q);
+        }
+    }
 }
