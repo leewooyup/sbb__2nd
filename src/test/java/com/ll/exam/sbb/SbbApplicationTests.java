@@ -52,4 +52,14 @@ class SbbApplicationTests {
 			assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
 		}
 	}
+
+	@Test
+	void 인터페이스_변경을_통해_새로운_메서드_사용() {
+		Optional<Question> oq = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+		if(oq.isPresent()) {
+			Question q = oq.get();
+			assertThat(q.getId()).isEqualTo(1);
+		}
+
+	}
 }
