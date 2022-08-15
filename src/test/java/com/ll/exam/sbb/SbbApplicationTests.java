@@ -3,6 +3,7 @@ package com.ll.exam.sbb;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,12 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class SbbApplicationTests {
 
+
+
     @Test
     void contextLoads() {
     }
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @Test
     void testJpa() {
@@ -97,5 +103,19 @@ class SbbApplicationTests {
             this.questionRepository.delete(q);
         }
         assertThat(this.questionRepository.count()).isEqualTo(3);
+    }
+
+    @Test
+    void 답변생성후_저장하기() {
+        Optional<Question> oq = this.questionRepository.findById(1);
+        if(oq.isPresent()) {
+            Question q = oq.get();
+
+            Answer a = new Answer();
+            a.setContent("springboot board의 줄임말입니다.");
+            a.setCreateDate(LocalDateTime.now());
+            a.setQuestion(q);
+            this.answerRepository.save(a);
+        }
     }
 }
