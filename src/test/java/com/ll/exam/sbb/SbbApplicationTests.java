@@ -118,4 +118,13 @@ class SbbApplicationTests {
             this.answerRepository.save(a);
         }
     }
+
+    @Test
+    void 답변_조회하기() {
+        Optional<Answer> oa = this.answerRepository.findById(1);
+        if(oa.isPresent()) {
+            Answer a = oa.get();
+            assertThat(a.getQuestion().getId()).isEqualTo(1);
+        }
+    }
 }
