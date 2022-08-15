@@ -87,4 +87,15 @@ class SbbApplicationTests {
             this.questionRepository.save(q);
         }
     }
+
+    @Test
+    void 데이터_삭제하기() {
+        assertThat(this.questionRepository.count()).isEqualTo(4);
+        Optional<Question> oq = this.questionRepository.findById(2);
+        if(oq.isPresent()) {
+            Question q = oq.get();
+            this.questionRepository.delete(q);
+        }
+        assertThat(this.questionRepository.count()).isEqualTo(3);
+    }
 }
