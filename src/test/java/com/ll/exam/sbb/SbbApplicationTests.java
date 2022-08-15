@@ -60,6 +60,14 @@ class SbbApplicationTests {
 			Question q = oq.get();
 			assertThat(q.getId()).isEqualTo(1);
 		}
+	}
 
+	@Test
+	void 두개의_엔티티속성명을_통해_조회() {
+		Optional<Question> oq = this.questionRepository.findBySubjectAndContent("sbb가 무엇인가요?","sbb에 대해서 알고 싶습니다.");
+		if(oq.isPresent()) {
+			Question q = oq.get();
+			assertThat(q.getId()).isEqualTo(1);
+		}
 	}
 }
