@@ -1,5 +1,7 @@
 package com.ll.exam.sbb;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.experimental.PackagePrivate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -106,5 +108,26 @@ public class MainController {
     public String getSession(@PathVariable String name, HttpSession session) {
         String value = (String)session.getAttribute(name);
         return "세션변수 %s의 값이 %s입니다".formatted(name, value);
+    }
+
+    @GetMapping("/addArticle")
+    @ResponseBody
+    public String addArticle(String title, String body) {
+        Article article = new Article(title, body);
+
+        return "%d번 게시물이 생성되었습니다".formatted(article.getId());
+    }
+}
+
+@AllArgsConstructor
+class Article {
+    private static int lastId = 0;
+    @Getter
+    private final int id;
+    private final String title;
+    private final String body;
+
+    public Article(String title, String body) {
+        this(++lastId, title, body);
     }
 }
