@@ -50,6 +50,14 @@ public class QuestionRepositoryTests {
     void 저장() {
         assertThat(lastSampleDataId).isEqualTo(2);
     }
+
+    @Test
+    void 삭제() {
+        assertThat(questionRepository.count()).isEqualTo(lastSampleDataId);
+        Question q = this.questionRepository.findById(1).orElse(null);
+        questionRepository.delete(q);
+        assertThat(this.questionRepository.count()).isEqualTo(lastSampleDataId-1);
+    }
 //    @Test
 //    void contextLoads() {
 //    }
