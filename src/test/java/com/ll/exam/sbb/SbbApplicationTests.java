@@ -40,6 +40,9 @@ class SbbApplicationTests {
         q2.setContent("id는 자동으로 생성되나요?");
         q2.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(q2);
+
+        assertThat(q1.getId()).isGreaterThan(0);
+        assertThat(q2.getId()).isGreaterThan(q1.getId());
     }
 
     @Test
