@@ -41,7 +41,9 @@ class SbbApplicationTests {
         q2.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(q2);
 
+        questionRepository.disableForeignKeyChecks();
         questionRepository.truncate();
+        questionRepository.enableForeignKeyChecks();
     }
     @Test
     void 데이터_저장하기() {
@@ -152,7 +154,7 @@ class SbbApplicationTests {
     @Transactional
     void 질문에_달린_답변찾기() {
         Optional<Question> oq = this.questionRepository.findById(1);
-        if(oq.isPresent()) {
+        if (oq.isPresent()) {
             Question q = oq.get();
 
             List<Answer> answerList = q.getAnswerList();
@@ -160,4 +162,5 @@ class SbbApplicationTests {
             assertThat(answerList.get(0).getContent()).isEqualTo("springboot board의 줄임말입니다.");
         }
     }
+
 }
