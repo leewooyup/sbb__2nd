@@ -42,6 +42,7 @@ public class QuestionRepositoryTests {
     }
 
     public static void clearData(QuestionRepository questionRepository) {
+        questionRepository.deleteAll();
         questionRepository.truncateTable();
     }
 
@@ -120,7 +121,7 @@ public class QuestionRepositoryTests {
             this.questionRepository.save(q);
         }
     }
-    
+
 //    @Test
 //    @Transactional
 //    void 질문에_달린_답변찾기() {
