@@ -115,19 +115,7 @@ public class QuestionRepositoryTests {
         }
     }
 
-    @Test
-    void 답변생성후_저장하기() {
-        Optional<Question> oq = this.questionRepository.findById(1);
-        if(oq.isPresent()) {
-            Question q = oq.get();
 
-            Answer a = new Answer();
-            a.setContent("springboot board의 줄임말입니다.");
-            a.setCreateDate(LocalDateTime.now());
-            a.setQuestion(q);
-            this.answerRepository.save(a);
-        }
-    }
 
     @Test
     void 답변_조회하기() {
