@@ -72,6 +72,17 @@ public class AnswerRepositoryTests {
             Answer a = oa.get();
             assertThat(a.getContent()).isEqualTo("sbb는 질문답변 게시판 입니다.");
         }
+    }
+
+    @Test
+    void 답변에_관련_질문_조회() {
+        Optional<Answer> oa = this.answerRepository.findById(1);
+        if(oa.isPresent()) {
+            Answer a = oa.get();
+            Question q = a.getQuestion();
+
+            assertThat(q.getId()).isEqualTo(1);
+        }
 
     }
 }
