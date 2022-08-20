@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller
+@Controller("/question")
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    @RequestMapping("/question/list")
+    @RequestMapping("/list")
     //@ResponseBody
     // @RequestBody가 없으면 resources/templates/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
@@ -24,9 +24,9 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/detail/{id}")
+    @RequestMapping("/detail/{id}")
     public String detail(Model model, @PathVariable int id) {
-        Question question = questionService.getQuestioin(id);
+        Question question = questionService.getQuestion(id);
 
         model.addAttribute("question", question);
         return "question_detail";
