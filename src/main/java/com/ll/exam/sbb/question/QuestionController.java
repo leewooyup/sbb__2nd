@@ -11,12 +11,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class QuestionController {
-    private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
     @RequestMapping("/question/list")
     //@ResponseBody
     // @RequestBody가 없으면 resources/templates/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
-        List<Question> questionList = questionRepository.findAll();
+        List<Question> questionList = questionService.getList();
 
         model.addAttribute("questionList", questionList);
 
