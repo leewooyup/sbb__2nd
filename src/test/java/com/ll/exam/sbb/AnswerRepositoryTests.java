@@ -36,14 +36,12 @@ public class AnswerRepositoryTests {
         a1.setContent("sbb는 질문답변 게시판 입니다.");
         a1.setCreateDate(LocalDateTime.now());
         q.addAnswer(a1);
-        answerRepository.save(a1);
 
         
         Answer a2 = new Answer();
         a2.setContent("sbb에서는 주로 스프링부트관련 내용을 다룹니다.");
         a2.setCreateDate(LocalDateTime.now());
         q.addAnswer(a2);
-        answerRepository.save(a2);
 
         questionRepository.save(q);
     }
@@ -64,11 +62,18 @@ public class AnswerRepositoryTests {
         if(oq.isPresent()) {
             Question q = oq.get();
 
-            Answer a = new Answer();
-            a.setContent("springboot board의 줄임말입니다.");
-            a.setCreateDate(LocalDateTime.now());
-            q.addAnswer(a);
-            this.answerRepository.save(a);
+            Answer a1 = new Answer();
+            a1.setContent("sbb는 질문답변 게시판 입니다.");
+            a1.setCreateDate(LocalDateTime.now());
+            q.addAnswer(a1);
+
+
+            Answer a2 = new Answer();
+            a2.setContent("sbb에서는 주로 스프링부트관련 내용을 다룹니다.");
+            a2.setCreateDate(LocalDateTime.now());
+            q.addAnswer(a2);
+
+            questionRepository.save(q);
         }
     }
 
