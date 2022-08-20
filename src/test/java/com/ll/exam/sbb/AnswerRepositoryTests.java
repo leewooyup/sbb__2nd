@@ -35,18 +35,15 @@ public class AnswerRepositoryTests {
         Answer a1 = new Answer();
         a1.setContent("sbb는 질문답변 게시판 입니다.");
         a1.setCreateDate(LocalDateTime.now());
-        a1.setQuestion(q);
+        q.addAnswer(a1);
         answerRepository.save(a1);
 
-        q.getAnswerList().add(a1);
         
         Answer a2 = new Answer();
         a2.setContent("sbb에서는 주로 스프링부트관련 내용을 다룹니다.");
         a2.setCreateDate(LocalDateTime.now());
-        a2.setQuestion(q);
+        q.addAnswer(a2);
         answerRepository.save(a2);
-
-        q.getAnswerList().add(a2);
 
         questionRepository.save(q);
     }
@@ -60,6 +57,8 @@ public class AnswerRepositoryTests {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     void 저장() {
         Optional<Question> oq = this.questionRepository.findById(1);
         if(oq.isPresent()) {
@@ -68,12 +67,14 @@ public class AnswerRepositoryTests {
             Answer a = new Answer();
             a.setContent("springboot board의 줄임말입니다.");
             a.setCreateDate(LocalDateTime.now());
-            a.setQuestion(q);
+            q.addAnswer(a);
             this.answerRepository.save(a);
         }
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     void 조회() {
         Optional<Answer> oa = this.answerRepository.findById(1);
         if(oa.isPresent()) {
@@ -83,6 +84,8 @@ public class AnswerRepositoryTests {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     void 답변에_관련_질문_조회() {
         Optional<Answer> oa = this.answerRepository.findById(1);
         if(oa.isPresent()) {
