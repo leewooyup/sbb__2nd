@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller("/question")
+@RequestMapping("/question")
+@Controller
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
