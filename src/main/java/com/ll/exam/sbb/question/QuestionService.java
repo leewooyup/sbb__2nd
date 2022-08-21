@@ -26,7 +26,7 @@ public class QuestionService {
 
     public void create(String subject, String content) {
         Question q = new Question();
-        q.setSubject(content);
+        q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         questionRepository.save(q);

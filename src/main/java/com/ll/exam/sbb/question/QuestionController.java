@@ -3,8 +3,10 @@ package com.ll.exam.sbb.question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/question")
@@ -32,26 +34,16 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    public String questionCreate() {
+    public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
     @PostMapping("/create")
-    public String questionCreate(Model model, QuestionForm questionForm) {
-        boolean hasError = false;
-        if(questionForm.getSubject() == null || questionForm.getSubject().trim().length() == 0) {
-            model.addAttribute("subjectErrorMsg", "제목을 입력해주세요");
-            hasError = true;
-        }
-
-        if(questionForm.getContent() == null || questionForm.getContent().trim().length() == 0) {
-            model.addAttribute("contentErrorMsg", "내용을 입력해주세요");
-            hasError = true;
-        }
-        if(hasError) {
-            model.addAttribute("questionForm", questionForm);
+    public String questionCreate(Model model, @Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
             return "question_form";
         }
+
         questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list";
     }
