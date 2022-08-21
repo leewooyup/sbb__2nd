@@ -4,14 +4,6 @@
     font-weight: normal;
     font-style: normal;
 }
-textarea {
-    width: 100%;
-}
-
-input[type=submit],
-button[type=submit] {
-    margin-top: 10px;
-}
 
 html > body {
     font-family: "GmarketSansMedium";

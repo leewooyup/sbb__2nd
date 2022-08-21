@@ -10,9 +10,25 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <title>Hello, sbb!</title>
 </head>
+<header>
+    <div class="container py-3 d-flex">
+        <a th:href="@{/}" class="mr-auto">Main Page</a>
+        <div class="flex-grow-1"></div>
+        <div>
+            <a th:href="@{/question/list}">Question List</a>
+        </div>
+    </div>
+</header>
 <body>
     <!-- 기본 템플릿 안에 삽입될 내용 Start -->
     <th:block layout:fragment="content"></th:block>
     <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+<footer>
+    <div class="container py-3 d-flex justify-content-center">
+        Copyright all rights reserved
+    </div>
+</footer>
+
 </body>
 </html>
