@@ -1,7 +1,6 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html layout:decorate="~{layout}">
 
-<div class="container my-3">
+<div layout:fragment="content" class="container my-3 dd">
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
 
 
@@ -34,3 +33,4 @@
         <button type="submit" class="btn btn-primary my-2">답변등록</button>
     </form>
 </div>
+</html>
