@@ -37,8 +37,17 @@ public class QuestionController {
     }
 
     @PostMapping("/create")
-    public String questionCreate(String subject, String content) {
-        questionService.create(subject, content);
+    public String questionCreate(Model model, QuestionForm questionForm) {
+        if(questionForm.getSubject() == null || questionForm.getSubject().trim().length() == 0) {
+            model.addAttribute("errorMsg", "제목을 입력해주세요");
+            return "question_form";
+        }
+
+        if(questionForm.getContent() == null || questionForm.getContent().trim().length() == 0) {
+            model.addAttribute("errorMsg", "내용을 입력해주세요");
+            return "question_form";
+        }
+        questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list";
     }
 }
