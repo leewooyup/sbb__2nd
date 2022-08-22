@@ -21,7 +21,11 @@ public class SecurityConfig {
                 .and()
                 .headers().addHeaderWriter(new XFrameOptionsHeaderWriter(
                         XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN
-                ));
+                ))
+                .and()
+                .formLogin()
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/");
         return http.build();
     }
 
