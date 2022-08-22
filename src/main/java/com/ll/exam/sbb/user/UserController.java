@@ -34,9 +34,11 @@ public class UserController {
 
         try{
             userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
-        } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
-            bindingResult.reject("signupFailed", e.getMessage());
+        } catch (SignupEmailDuplicatedException e) {
+            bindingResult.reject("signupEmailDuplicated", e.getMessage());
+            return "signup_form";
+        } catch (SignupUsernameDuplicatedException e) {
+            bindingResult.reject("signupUsernameDuplicatedException", e.getMessage());
             return "signup_form";
         }
         return "redirect:/";
