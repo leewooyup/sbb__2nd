@@ -13,15 +13,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <title>Hello, sbb!</title>
 </head>
-<header>
-    <div class="container py-3 d-flex">
-        <a th:href="@{/}" class="mr-auto">Main Page</a>
-        <div class="flex-grow-1"></div>
-        <div>
-            <a th:href="@{/question/list}">Question List</a>
-        </div>
-    </div>
-</header>
+<header th:replace="navbar :: navbarFragment"></header>
 <body style="min-height:100vh;" class="d-flex flex-column">
     <!-- 기본 템플릿 안에 삽입될 내용 Start -->
     <main class="flex-grow-1">
