@@ -4,6 +4,7 @@ import com.ll.exam.sbb.answer.AnswerRepository;
 import com.ll.exam.sbb.question.Question;
 import com.ll.exam.sbb.question.QuestionRepository;
 import com.ll.exam.sbb.user.SiteUser;
+import com.ll.exam.sbb.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,12 @@ public class QuestionRepositoryTests {
 
     @Autowired
     private QuestionRepository questionRepository;
-    private static int lastSampleDataId;
+    @Autowired
+    private AnswerRepository answerRepository;
+    @Autowired
+    private UserRepository userRepository;
 
+    private static long lastSampleDataId;
     @BeforeEach
     void beforeEach() {
         clearData();
@@ -46,9 +51,8 @@ public class QuestionRepositoryTests {
         return q2.getId();
     }
 
-    public static void clearData(QuestionRepository questionRepository) {
-        questionRepository.deleteAll();
-        questionRepository.truncateTable();
+    public static void clearData(UserRepository userRepository, AnswerRepository answerRepository, QuestionRepository questionRepository) {
+        UserServiceTests.clearData(userRepository, answerRepository, questionRepository);
     }
 
     private void createSampleData() {
@@ -56,7 +60,7 @@ public class QuestionRepositoryTests {
     }
 
     private void clearData() {
-        clearData(questionRepository);
+        clearData(userRepository, answerRepository, questionRepository);
     }
     @Test
     void 저장() {
@@ -70,9 +74,6 @@ public class QuestionRepositoryTests {
         questionRepository.delete(q);
         assertThat(this.questionRepository.count()).isEqualTo(lastSampleDataId-1);
     }
-
-    @Autowired
-    private AnswerRepository answerRepository;
 
     @Test
     void 모든_질문_가져오기() {
