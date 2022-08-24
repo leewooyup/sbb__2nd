@@ -4,6 +4,7 @@ import com.ll.exam.sbb.answer.Answer;
 import com.ll.exam.sbb.answer.AnswerRepository;
 import com.ll.exam.sbb.question.Question;
 import com.ll.exam.sbb.question.QuestionRepository;
+import com.ll.exam.sbb.user.SiteUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,14 @@ public class AnswerRepositoryTests {
 
         Answer a1 = new Answer();
         a1.setContent("sbb는 질문답변 게시판 입니다.");
+        a1.setAuthor(new SiteUser(1));
         a1.setCreateDate(LocalDateTime.now());
         q.addAnswer(a1);
 
         
         Answer a2 = new Answer();
         a2.setContent("sbb에서는 주로 스프링부트관련 내용을 다룹니다.");
+        a2.setAuthor(new SiteUser(2));
         a2.setCreateDate(LocalDateTime.now());
         q.addAnswer(a2);
 
@@ -72,12 +75,14 @@ public class AnswerRepositoryTests {
 
             Answer a1 = new Answer();
             a1.setContent("sbb는 질문답변 게시판 입니다.");
+            a1.setAuthor(new SiteUser(1));
             a1.setCreateDate(LocalDateTime.now());
             q.addAnswer(a1);
 
 
             Answer a2 = new Answer();
             a2.setContent("sbb에서는 주로 스프링부트관련 내용을 다룹니다.");
+            a2.setAuthor(new SiteUser(2));
             a2.setCreateDate(LocalDateTime.now());
             q.addAnswer(a2);
 
