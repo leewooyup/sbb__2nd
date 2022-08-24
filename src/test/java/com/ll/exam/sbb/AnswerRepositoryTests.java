@@ -50,12 +50,16 @@ public class AnswerRepositoryTests {
         questionRepository.save(q);
     }
 
-    private void clearData() {
+    public static void clearData(AnswerRepository answerRepository, QuestionRepository questionRepository) {
         QuestionRepositoryTests.clearData(questionRepository);
 
         answerRepository.deleteAll();
         answerRepository.truncateTable();
 
+    }
+
+    private void clearData() {
+        clearData(answerRepository, questionRepository);
     }
 
     @Test
