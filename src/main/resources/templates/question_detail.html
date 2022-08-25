@@ -22,7 +22,14 @@
                    sec:authorize="isAuthenticated()"
                    th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
                    class="btn btn-sm btn-outline-secondary"
-                   th:text="수정"></a>
+                   th:text="수정">
+                </a>
+                <a onclick="if(!confirm('정말로 삭제하시겠습니까?')) return false;" th:href="@{|/question/delete/${question.id}|}"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                   class="btn btn-sm btn-outline-secondary"
+                   th:text="삭제">
+                </a>
             </div>
         </div>
     </div>
