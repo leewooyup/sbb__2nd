@@ -33,9 +33,7 @@
     </div>
 
     <form method="POST" th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" class="my-3">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-        </div>
+        <div th:replace="form_errors :: formErrorsFragment"></div>
         <textarea name="content" rows="15" class="form-control"></textarea>
         <button type="submit" class="btn btn-primary my-2">답변등록</button>
     </form>
