@@ -1,5 +1,6 @@
 package com.ll.exam.sbb.user;
 
+import com.ll.exam.sbb.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,5 +30,11 @@ public class UserService {
         }
 
         return user;
+    }
+
+    public SiteUser getUser(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow(() ->
+                new DataNotFoundException("siteUser not found")
+        );
     }
 }

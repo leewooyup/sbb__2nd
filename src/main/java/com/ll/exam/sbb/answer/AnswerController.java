@@ -3,6 +3,7 @@ package com.ll.exam.sbb.answer;
 import com.ll.exam.sbb.DataNotFoundException;
 import com.ll.exam.sbb.question.Question;
 import com.ll.exam.sbb.question.QuestionRepository;
+import com.ll.exam.sbb.user.SiteUser;
 import com.ll.exam.sbb.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 @RequestMapping("/answer")
@@ -24,7 +26,7 @@ public class AnswerController {
     private final UserService userService;
 
     @PostMapping("/create/{id}")
-    public String detail(Model model, @PathVariable int id, @Valid AnswerForm answerform, BindingResult bindingResult) {
+    public String detail(Principal principal, Model model, @PathVariable int id, @Valid AnswerForm answerform, BindingResult bindingResult) {
         Optional<Question> oq = questionRepository.findById(id);
 
         if(oq.isPresent()) {
@@ -35,7 +37,9 @@ public class AnswerController {
                 return "question_detail";
             }
 
-            answerService.create(question, answerform.getContent());
+            SiteUser siteUser = userService.getUser(principal.getName());
+
+            answerService.create(question, answerform.getContent(), siteUser);
             return "redirect:/question/detail/%d".formatted(id);
         }
 
