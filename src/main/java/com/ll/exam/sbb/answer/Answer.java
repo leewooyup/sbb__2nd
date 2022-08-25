@@ -20,7 +20,8 @@ public class Answer {
     private String content;
 
     private LocalDateTime createDate;
-
+    private LocalDateTime modifyDate;
+    
     @ManyToOne
     private Question question;
 
